@@ -1,0 +1,40 @@
+[class*=_container] {
+  width: 1100px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.btn {
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.btn-search {
+  padding: 3px 10px;
+  border-radius: 1.1em;
+  border: none;
+  background-color: #9C1212;
+}
+.btn-search:hover {
+  background-color: rgba(156, 18, 18, 0.5450980392);
+}
+
+.form-field {
+  display: flex;
+  width: 100%;
+}
+.form-field_search {
+  border-radius: 30px;
+  background-color: #fff;
+  padding: 5px 10px;
+}
+
+.search-input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: 20px;
+}
