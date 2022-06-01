@@ -18,9 +18,9 @@
 						<input class="login-button-btn" type="button" value="Войти">
 					</div>
 				</div>
-				<div class="search search_container">
+				<div class="search search__container">
 					<form class="form-search" method="post" action="#">
-						<div class="form-field form-field_search">
+						<div class="form-field form-field__search">
 							<input class="search-input" type="text" placeholder="Введите термин, чтобы найти информацию о нем.">
 							<button class="btn btn-search"><object type="image/svg+xml" data ="/img/search-icon.svg"></object></button>
 						</div>
