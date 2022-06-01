@@ -1,4 +1,4 @@
-[class*=_container] {
+[class*="--container"] {
   width: 1100px;
   margin-right: auto;
   margin-left: auto;
@@ -43,6 +43,10 @@ p {
   margin-top: 45px;
 }
 
+.search {
+  margin-top: 60px;
+}
+
 .btn {
   cursor: pointer;
   box-sizing: border-box;
@@ -59,8 +63,6 @@ p {
 
 .login-button {
   margin-top: 45px;
-}
-.login-button-btn {
   width: 187px;
   height: 82px;
   border-radius: 30px;
@@ -74,7 +76,7 @@ p {
   border: none;
   cursor: pointer;
 }
-.login-button-btn:hover {
+.login-button:hover {
   background-color: rgba(191, 76, 76, 0.7333333333);
 }
 
@@ -82,7 +84,7 @@ p {
   display: flex;
   width: 100%;
 }
-.form-field__search {
+.form-field--search {
   border-radius: 30px;
   background-color: #fff;
   padding: 5px 10px;
@@ -113,16 +115,8 @@ p {
   line-height: 58px;
 }
 
-.discription-content {
+.text-content {
   padding: 25px 86px 25px 86px;
-}
-
-.about-content {
-  padding: 25px 86px 25px 86px;
-}
-
-.search {
-  margin-top: 60px;
 }
 
 .footer {

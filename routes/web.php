@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TermController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +14,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('index');
 });
+
+Route::group( ['middleware' => ['auth'],'prefix' => 'admin'], function (){
+	
+	Route::get( "/", "TermController@index");
+	Route::post( "/add", "TermController@add");
+	Route::post( "/delete", "TermController@delete");
+	Route::post( "/edit", "TermController@edit");
+
+	Route::get( "/examples", function() {
+		return view('admin.example');
+	});
+
+	Route::get( "/users", function() {
+		return view('admin.user');
+	});
+});
+
+Auth::routes();
+
