@@ -14,7 +14,14 @@ use App\Http\Controllers\TermController;
 */
 
 Route::get('/', function () {
-	return view('index');
+	$terms = App\Models\Term::all()->toArray();
+	return view('index',compact('terms'));
+});
+
+Route::get('/detail/{id}', function ($id) {
+	$term = App\Models\Term::find($id)->toArray();
+	$examples = App\Models\Example::where("term_id" ,"=", $id)->get()->toArray();
+	return view('detail',compact('term','examples'));
 });
 
 Route::group( ['middleware' => ['auth'],'prefix' => 'admin'], function (){
@@ -24,10 +31,15 @@ Route::group( ['middleware' => ['auth'],'prefix' => 'admin'], function (){
 	Route::post( "/delete", "TermController@delete");
 	Route::post( "/edit", "TermController@edit");
 
-	Route::get( "/examples", function() {
-		return view('admin.example');
+	Route::group(['prefix' => 'examples'],function () {
+	
+		Route::get( "/", "ExampleController@index");
+		Route::post( "/add", "ExampleController@add");
+		Route::post( "/delete", "ExampleController@delete");
+		Route::post( "/edit", "ExampleController@edit");
+	
 	});
-
+	
 	Route::get( "/users", function() {
 		return view('admin.user');
 	});

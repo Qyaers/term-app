@@ -493,6 +493,13 @@ document.addEventListener('DOMContentLoaded', function (e) {
 		})
 	}
 })
+// --------------------------------------------------------------------------------------
+const getTermData = (e) => {
+	if (e.key == "Enter")
+		console.log(e.key);
+}
 
-
+let searchInput = document.querySelector(".search-input");
+searchInput.addEventListener('keypress', getTermData);
+console.log(searchInput);
 

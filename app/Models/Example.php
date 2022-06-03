@@ -9,6 +9,9 @@ class Example extends Model
 {
 	use HasFactory;
 
+	public $fillable = ["text","term_id"];
+	public $timestamps = false;
+
 	public function term()
 	{
 		return $this->belongsTo(Term::class);

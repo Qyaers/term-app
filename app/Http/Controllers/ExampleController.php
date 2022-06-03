@@ -3,26 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Example;
 use App\Models\Term;
 
-class TermController extends Controller
+class ExampleController extends Controller
 {
 	public function index()
 	{
-		$data = Term::paginate(15); 
-		return view("admin.term",compact("data"));
+		$data = Example::paginate(10);
+		$terms = Term::all()->toArray();
+		return view("admin.example",compact("data",'terms'));
 	}
 
 	public function edit(Request $request)
 	{
 		$data = $request->toArray();
 		$update = [
-			"nameTerm" => $data["nameTerm"],
-			"discription" => $data["discription"],
+			"text" => $data["text"],
+			"term_id" => $data["term_id"][0],
 		];
-		$changeElem = Term::query()->where("id",$data["id"])->update($update);
+		$changeElem = Example::query()->where("id",$data["id"])->update($update);
 		if ($changeElem || $changeLink) {
-			$result = Term::query()->where("id",$data["id"])->get()->toArray();
+			$result = Example::query()->where("id",$data["id"])->get()->toArray();
+			$result["term_id"] = Example::find($data["id"])->term()->get()->toArray();
 		} else {
 			$result = ["error"=>"Ошибка изменения базы."];
 		}
@@ -34,7 +37,7 @@ class TermController extends Controller
 		$deleteId = $request->toArray();
 		$deleted = $error = false;
 		foreach ($deleteId as $id) {
-			if(Term::find($id)->delete()) {
+			if(Example::find($id)->delete()) {
 				$deleted = true;
 			} else {
 				$error = true;
@@ -59,17 +62,17 @@ class TermController extends Controller
 	{
 		$data = $request->toArray();
 		$newData = [
-			"nameTerm" => $data["nameTerm"],
-			"discription" => $data["discription"],
+			"text" => $data["text"],
+			"term_id" => $data["term_id"][0]
 		];
-		if (Term::query()->where("nameTerm","=",$newData["nameTerm"])->get()->count()) {
+		if (Example::query()->where("text","=",$newData["text"])->get()->count()) {
 			return \response(json_encode([
 				"status" => "error",
-				"message" => "Такой термин уже существует"
+				"message" => "Такое описание уже существует"
 			]));
 		}
-		if ($newElem = Term::firstOrCreate($newData)) {
-			Term::find($newElem["id"]);
+		if ($newElem = Example::firstOrCreate($newData)) {
+			Example::find($newElem["id"]);
 			return \response(json_encode($newElem));
 		}
 		else{}
