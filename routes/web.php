@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TermController;
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +24,16 @@ Route::get('/detail/{id}', function ($id) {
 	$term = App\Models\Term::find($id)->toArray();
 	$examples = App\Models\Example::where("term_id" ,"=", $id)->get()->toArray();
 	return view('detail',compact('term','examples'));
+});
+
+Route::get('/searchPage/', function (Request $request) {
+	$query = $request['q'];
+	if($query)
+		$termsSearch = App\Models\Term::where("nameTerm" ,"like", "%".$query."%")->get()->toArray();
+	else
+		$termsSearch = "";
+	$terms = App\Models\Term::all()->toArray();
+	return view('searchPage',compact('termsSearch','terms'));
 });
 
 Route::group( ['middleware' => ['auth'],'prefix' => 'admin'], function (){

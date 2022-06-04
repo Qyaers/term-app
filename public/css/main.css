@@ -55,6 +55,11 @@ p {
   padding: 3px 10px;
   border-radius: 1.1em;
   border: none;
+  background-image: url("/img/search-icon.svg");
+  min-height: 40px;
+  min-width: 40px;
+  background-position: center;
+  background-repeat: no-repeat;
   background-color: #9C1212;
 }
 .btn-search:hover {

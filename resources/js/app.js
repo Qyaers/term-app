@@ -494,12 +494,14 @@ document.addEventListener('DOMContentLoaded', function (e) {
 	}
 })
 // --------------------------------------------------------------------------------------
-const getTermData = (e) => {
-	if (e.key == "Enter")
-		console.log(e.key);
+
+const searchTerm = (e) => {
+	let searchInput = document.querySelector(".search-input");
+	document.location.href = `/searchPage/?q=${searchInput.value}`;
 }
 
-let searchInput = document.querySelector(".search-input");
-searchInput.addEventListener('keypress', getTermData);
-console.log(searchInput);
+document.querySelector(".search-input").addEventListener('keypress', (e) => {
+	if (e.key == "Enther") searchTerm();
+});
+document.querySelector(".btn-search").addEventListener('click', searchTerm);
 
